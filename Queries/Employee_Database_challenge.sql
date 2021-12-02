@@ -31,3 +31,19 @@ group by title
 order by count(title) desc;
 
 select * from RetireTitles;
+
+-- DELIVERABLE 2
+select  distinct on (e.emp_no) e.emp_no, e.first_name, e.last_name, e.birth_date, 
+	   d.from_date, d.to_date,
+	   t.title
+into mentoring
+from employees as e
+left join dept_employee as d
+on e.emp_no=d.emp_no
+left join titles as t
+on e.emp_no = t.emp_no
+where(e.birth_date between '1965-01-01' and '1965-12-31')
+	and (d.to_date = '9999-01-01')
+order by e.emp_no;
+
+select * from mentoring;
